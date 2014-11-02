@@ -7,8 +7,7 @@ import util
 
 def makeTrainingSet(subredditFiles):
 	extractData.parseData(subredditFiles)
-	with open('data.txt', 'r') as dataFile:
-		
+    
 
 
 
