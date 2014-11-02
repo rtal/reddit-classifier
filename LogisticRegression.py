@@ -5,6 +5,7 @@ import extractData
 import FeatureExtractor
 import util
 
+# One-vs-All learner
 def train(trainingSet, subredditLabels):
 	numIterations = 20
 	eta = 0.05
@@ -12,28 +13,33 @@ def train(trainingSet, subredditLabels):
 	#dictionary of dictionaries (weights)
 	weightDict = {}
 
-	for i in range(numIterations):
-		for example in trainingSet:
-			example = json.loads(example)
-			title = example['title']
-			subreddit = example['subreddit']
+	def gradLoss(phiX, w, y):
+		score = dotProduct(w, phiX)
+		margin = score * y
+		grad = 0
+		if margin < 1:
+			grad = -1 * features * y
+		return grad
 
-			features = FeatureExtractor.extractFeatures(title)
+	for label in subredditLabels:
+		weightVector = weightDict[label]
+		for i in range(numIterations):
+			for example in trainingSet:
+				example = json.loads(example)
+				title = example['title']
+				subreddit = example['subreddit']
 
-			currentWeightVector = weightDict[subreddit]
+				features = FeatureExtractor.extractFeatures(title)
 
-			maxScore = float('-inf')
-			for label in subredditLabels:
-				weightVector = weightDict[label]
+				# currentWeightVector = weightDict[subreddit]
 
-				score = dotProduct(weightVector, features) - dotProduct(currentWeightVector, features)
-				if label != subreddit:
-					score = score + 1
+				y = -1
+				if label == subreddit:
+					y = 1
 
-				if score > maxScore:
-					maxScore = score
+				grad = gradLoss(features, currentWeightVector, y)
 
-			currentWeightVector = currentWeightVector - eta * 
+
 
 
 if __name__ == '__main__':
