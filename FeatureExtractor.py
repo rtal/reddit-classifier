@@ -7,8 +7,6 @@ def extractFeatures(title):
 	Use word frequencies (to start)
 	Return dictionary
 	"""
-	featureVector = collections.Counter()
 	tokens = title.split()
-	# FIXME: we can remove stop words here
-	[featureVector.update([word.lower()]) for word in tokens]
+	featureVector = collections.Counter(tokens)
 	return featureVector
