@@ -10,5 +10,5 @@ def extractFeatures(title):
 	featureVector = collections.Counter()
 	tokens = title.split()
 	# FIXME: we can remove stop words here
-	[featureVector.update([word]) for word in tokens]
+	[featureVector.update([word.lower()]) for word in tokens]
 	return featureVector
