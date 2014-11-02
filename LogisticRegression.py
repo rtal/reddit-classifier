@@ -5,7 +5,6 @@ import extractData
 import FeatureExtractor
 import util
 
-
 def train(trainingSet, subredditLabels):
 	numIterations = 20
 	eta = 0.05
