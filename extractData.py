@@ -13,7 +13,7 @@ def parseData(fileList):
     with open('data.txt', 'wb') as dataFile:
         dataFile.truncate()
         for fileName in fileList:
-            subreddit = fileName.strip('.csv')
+            subreddit = fileName.strip('.csv').strip('data/')
             with open(fileName, 'rb') as redditFile:
                 redditReader = csv.reader(redditFile)
                 for post in redditReader:
