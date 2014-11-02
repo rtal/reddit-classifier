@@ -10,7 +10,7 @@ def parseData(fileList):
         Note that the data.txt file is overwritten each time this script is called.
         This behavior may be modified in the future so that new data is appended.
     """
-    with open('data.txt', 'wb') as dataFile:
+    with open('Data.txt', 'wb') as dataFile:
         dataFile.truncate()
         for fileName in fileList:
             subreddit = fileName.strip('.csv').strip('data/')
