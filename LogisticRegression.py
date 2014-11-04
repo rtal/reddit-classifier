@@ -10,7 +10,7 @@ def train(trainingSet, subredditLabels):
     numIterations = 20
     eta = 0.05
 
-	#dictionary of dictionaries (weights)
+    #dictionary of dictionaries (weights)
     weightDict = {}
     for label in subredditLabels:
         weightDict[label] = {}
@@ -81,8 +81,6 @@ def predict(weights, testSet):
 
     print 'accuracy ' + str(float(correct) / total)
     print 'wrong ' + str(float(incorrect) / total)
-
-
 
 
 
