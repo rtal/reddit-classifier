@@ -3,7 +3,8 @@ from collections import Counter
 
 def dotProduct(d1, d2):
     """
-    @param dict d1: a feature vector represented by a mapping from a feature (string) to a weight (float).
+    @param dict d1: a feature vector represented by a mapping from a 
+                    feature (string) to a weight (float).
     @param dict d2: same as d1
     @return float: the dot product between d1 and d2
     """
@@ -37,8 +38,8 @@ def readExamples(path):
 def evaluatePredictor(examples, predictor):
     '''
     predictor: a function that takes an x and returns a predicted y.
-    Given a list of examples (x, y), makes predictions based on |predict| and returns the fraction
-    of misclassiied examples.
+    Given a list of examples (x, y), makes predictions based on |predict| 
+        and returns the fraction of misclassiied examples.
     '''
     error = 0
     for x, y in examples:

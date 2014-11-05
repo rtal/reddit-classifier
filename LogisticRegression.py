@@ -4,9 +4,10 @@ import collections
 import extractData
 import FeatureExtractor
 import util
+import argparse
 
 # One-vs-All learner
-def train(trainingSet, subredditLabels):
+def train(trainingSet, subredditLabels, args):
     numIterations = 20
     eta = 0.05
 
@@ -36,7 +37,7 @@ def train(trainingSet, subredditLabels):
                 title = example['title']
                 subreddit = example['subreddit']
 
-                features = FeatureExtractor.extractFeatures(title)
+                features = FeatureExtractor.extractFeatures(title, args)
 
                 y = -1
                 if label == subreddit:
@@ -53,7 +54,7 @@ def train(trainingSet, subredditLabels):
     return weightDict
 
 
-def predict(weights, testSet):
+def predict(weights, testSet, args):
     correct = 0
     incorrect = 0
     total = 0
@@ -61,7 +62,7 @@ def predict(weights, testSet):
         data = json.loads(data)
         title = data['title']
         subreddit = data['subreddit']
-        features = FeatureExtractor.extractFeatures(title)
+        features = FeatureExtractor.extractFeatures(title, args)
         maxScore = float('-inf')
         prediction = ''
 
@@ -85,14 +86,18 @@ def predict(weights, testSet):
 
 
 if __name__ == '__main__':
-    subredditLabels = ['ArtHistory', 'Disneyland']
-    extractData.parseData(sys.argv[1:])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filenames', nargs='*')
+    parser.add_argument('--opt1', action='store_true')
+    parser.add_argument('--opt2', action='store_true')
+    args = parser.parse_args()
+
+    subredditLabels = []
+    for f in args.filenames:
+        subredditLabels.append(f[5:-4])
+
+    extractData.parseData(args.filenames)
     with open('TrainData.txt', 'r') as trainingSet:
-        weightDict = train(trainingSet, subredditLabels)
-        # print weightDict['ArtHistory']
-        # print
-        # print 
-        # print
-        # print weightDict['Disneyland']
+        weightDict = train(trainingSet, subredditLabels, args)
     with open('TestData.txt', 'r') as testSet:
-        predict(weightDict, testSet)
+        predict(weightDict, testSet, args)
