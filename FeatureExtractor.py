@@ -1,5 +1,6 @@
 import json
 import collections
+import string
 
 IGNORED_WORDS = [
     'the', 'The',
@@ -36,12 +37,19 @@ def extractFeatures(title, args):
     Use word frequencies (to start)
     Return dictionary
     """
+    
+    # Optimization 1: Remove punctuation
+    if args.opt1:
+        exlusionSet = set(string.punctuation)
+        exlusionSet.remove("\'")
+        title = ''.join(c for c in title if c not in exlusionSet)
+    
     tokens = title.split()
 
     featureVector = collections.Counter(tokens)
 
-    # Optimization 1: Change contractions to their component words
-    if args.opt1:
+    # Optimization 2: Change contractions to their component words
+    if args.opt2:
         toAdd = {}
         for word in CONTRACTIONS:
             exists = featureVector.pop(word, 0)
@@ -49,8 +57,8 @@ def extractFeatures(title, args):
                 for replacement in CONTRACTIONS[word]:
                     featureVector[replacement] = exists
 
-    # Optimization 2: remove IGNORED_WORDS from the feature vector
-    if args.opt2:
+    # Optimization 3: remove IGNORED_WORDS from the feature vector
+    if args.opt3:
         for word in IGNORED_WORDS:
             featureVector.pop(word, None)
 

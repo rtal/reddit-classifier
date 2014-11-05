@@ -88,9 +88,11 @@ def predict(weights, testSet, args):
 python LogisticRegression.py [fileNames] [--opt1] [--opt2] [...]
 
 fileNames (required): as many csv files as you want, separated by spaces.
---opt1 (optional): optimization to remove common filler words from the
+--opt1 (optional): Optimization to remove punctuation (except apostrophes)
+        from the title
+--opt2 (optional): optimization to remove common filler words from the
         feature vector.
---opt2 (optional): optimization to change contractions to expanded words,
+--opt3 (optional): optimization to change contractions to expanded words,
         preserving the count of the contraction
 """
 
@@ -99,10 +101,11 @@ if __name__ == '__main__':
     parser.add_argument('fileNames', nargs='*')
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
+    parser.add_argument('--opt3', action='store_true')
     args = parser.parse_args()
 
     subredditLabels = []
-    for f in args.filenames:
+    for f in args.fileNames:
         subredditLabels.append(f[5:-4])
 
     extractData.parseData(args.fileNames)
