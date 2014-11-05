@@ -84,10 +84,19 @@ def predict(weights, testSet, args):
     print 'wrong ' + str(float(incorrect) / total)
 
 
+""" To run this program:
+python LogisticRegression.py [fileNames] [--opt1] [--opt2] [...]
+
+fileNames (required): as many csv files as you want, separated by spaces.
+--opt1 (optional): optimization to remove common filler words from the
+        feature vector.
+--opt2 (optional): optimization to change contractions to expanded words,
+        preserving the count of the contraction
+"""
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('filenames', nargs='*')
+    parser.add_argument('fileNames', nargs='*')
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     args = parser.parse_args()
@@ -96,7 +105,7 @@ if __name__ == '__main__':
     for f in args.filenames:
         subredditLabels.append(f[5:-4])
 
-    extractData.parseData(args.filenames)
+    extractData.parseData(args.fileNames)
     with open('TrainData.txt', 'r') as trainingSet:
         weightDict = train(trainingSet, subredditLabels, args)
     with open('TestData.txt', 'r') as testSet:
