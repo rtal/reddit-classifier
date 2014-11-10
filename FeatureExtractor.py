@@ -1,4 +1,3 @@
-import json
 import collections
 import string
 
@@ -77,7 +76,6 @@ def extractFeatures(title, args):
 
     # Optimization 2: Change contractions to their component words
     if args.opt2:
-        toAdd = {}
         for word in CONTRACTIONS:
             exists = featureVector.pop(word, 0)
             if exists > 0:
