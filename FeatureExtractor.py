@@ -12,6 +12,31 @@ IGNORED_WORDS = [
     'which', 'Which',
     'on', 'Or',
     'who', 'Who',
+    'they', 'They',
+    'of', 'Of',
+    'he', 'He',
+    'she', 'She',
+    'anybody', 'Anybody',
+    'it', 'It',
+    'without', 'Without',
+    'between', 'Between',
+    'that', 'That',
+    'my', 'My',
+    'more', 'More',
+    'much', 'Much',
+    'either', 'Either',
+    'neither', 'Neither',
+    'when', 'When',
+    'while', 'While',
+    'although', 'Although',
+    'be', 'Be',
+    'am', 'Am',
+    'are', 'Are',
+    'got', 'Got',
+    'do', 'Do',
+    'no', 'No',
+    'nor', 'Nor',
+    'as', 'As'
 ]
 
 CONTRACTIONS = {
@@ -25,12 +50,12 @@ CONTRACTIONS = {
     "Shouldn't": ['should', 'not'],
     "I'm": ['I', 'am'],
     "i'm": ['I', 'am'],
-    "He's": ['He' 'is'],
-    "he's": ['He' 'is'],
-    "She's": ['She', 'is'],
-    "she's": ['She', 'is'],
-    "it's": ['It', 'is'],
-    "It's": ['It', 'is']
+    "He's": ['he' 'is'],
+    "he's": ['he' 'is'],
+    "She's": ['she', 'is'],
+    "she's": ['she', 'is'],
+    "it's": ['it', 'is'],
+    "It's": ['it', 'is']
 }
 
 def extractFeatures(title, args):
