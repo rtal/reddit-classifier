@@ -28,7 +28,9 @@ CONTRACTIONS = {
     "He's": ['He' 'is'],
     "he's": ['He' 'is'],
     "She's": ['She', 'is'],
-    "she's": ['She', 'is']
+    "she's": ['She', 'is'],
+    "it's": ['It', 'is'],
+    "It's": ['It', 'is']
 }
 
 def extractFeatures(title, args):
