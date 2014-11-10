@@ -5,6 +5,7 @@ import extractData
 import FeatureExtractor
 import util
 import argparse
+import operator
 
 # One-vs-All learner
 def train(trainingSet, subredditLabels, args):
@@ -68,6 +69,7 @@ def predict(weights, testSet, args):
 
         for key in weights.keys():
             weightVector = weights[key]
+
             score = util.dotProduct(weightVector, features)
             if score > maxScore:
                 prediction = key
@@ -76,12 +78,40 @@ def predict(weights, testSet, args):
         if prediction == subreddit:
             correct += 1
         else:
+            try:
+                print title
+                print "predicted: " + prediction.encode('utf-8')
+                print features
+                printRelevantWeights(weights, features)
+                print "-----------------"
+
+
+            except UnicodeEncodeError:
+                print "error"
             incorrect += 1
         total += 1
 
 
     print 'accuracy ' + str(float(correct) / total)
     print 'wrong ' + str(float(incorrect) / total)
+
+def printRelevantWeights(weightDict, wordFeatures):
+    for subredditKey in weightDict.keys():
+        print "subreddit: " + str(subredditKey) 
+        for wordKey in wordFeatures.keys():
+            print "key: " + str(wordKey)
+            print "weight: " + str(weightDict[subredditKey].get(wordKey, 0))
+
+
+def printSortedWeights(weightDict):
+    for key in weightDict.keys():
+        print "for key: " + str(key)
+        sorted_x = sorted(weightDict[key].items(), key=operator.itemgetter(1))
+        print sorted_x
+        print "========================================"
+        print "========================================"
+        print "========================================"
+        print "========================================"
 
 
 """ To run this program:
@@ -113,3 +143,5 @@ if __name__ == '__main__':
         weightDict = train(trainingSet, subredditLabels, args)
     with open('TestData.txt', 'r') as testSet:
         predict(weightDict, testSet, args)
+    
+    #printSortedWeights(weightDict)
