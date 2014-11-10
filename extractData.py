@@ -1,6 +1,7 @@
 import sys
 import csv
 import json
+import random
 
 
 def parseData(fileList):
@@ -30,6 +31,24 @@ def parseData(fileList):
                         else:
                             trainFile.write(json.dumps({'title': post[4].lower(), 'subreddit': subreddit}) + '\n')
                         i += 1
+    shuffleData()
+
+
+# Shuffling a file: http://stackoverflow.com/questions/4618298/randomly-mix-lines-of-3-million-line-file
+def shuffleData():
+    with open('TrainData.txt', 'r') as train:
+        data = [(random.random(), line) for line in train]
+        data.sort()
+        with open('TrainDataShuffled.txt', 'w') as actualTrain:
+            for rand, line in data:
+                actualTrain.write(line)
+
+    with open('TestData.txt', 'r') as test:
+        data = [(random.random(), line) for line in test]
+        data.sort()
+        with open('TestDataShuffled.txt', 'w') as actualTest:
+            for rand, line in data:
+                actualTest.write(line)
 
 
 def printData(fileName):

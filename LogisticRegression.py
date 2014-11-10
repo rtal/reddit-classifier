@@ -78,16 +78,16 @@ def predict(weights, testSet, args):
         if prediction == subreddit:
             correct += 1
         else:
-            try:
-                print title
-                print "predicted: " + prediction.encode('utf-8')
-                print features
-                printRelevantWeights(weights, features)
-                print "-----------------"
+            # try:
+            #     print title
+            #     print "predicted: " + prediction.encode('utf-8')
+            #     print features
+            #     # printRelevantWeights(weights, features)
+            #     print "-----------------"
 
 
-            except UnicodeEncodeError:
-                print "error"
+            # except UnicodeEncodeError:
+            #     print "error"
             incorrect += 1
         total += 1
 
@@ -139,9 +139,9 @@ if __name__ == '__main__':
         subredditLabels.append(f[5:-4])
 
     extractData.parseData(args.fileNames)
-    with open('TrainData.txt', 'r') as trainingSet:
+    with open('TrainDataShuffled.txt', 'r') as trainingSet:
         weightDict = train(trainingSet, subredditLabels, args)
-    with open('TestData.txt', 'r') as testSet:
+    with open('TestDataShuffled.txt', 'r') as testSet:
         predict(weightDict, testSet, args)
     
-    #printSortedWeights(weightDict)
+    # printSortedWeights(weightDict)
