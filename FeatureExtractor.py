@@ -19,7 +19,7 @@ CONTRACTIONS = {
     "he's": ['he' 'is'],
     "she's": ['she', 'is'],
     "it's": ['it', 'is'],
-    "wouldn't": ['would', 'not']
+    "wouldn't": ['would', 'not'],
     "couldn't": ['could', 'not']
 }
 
