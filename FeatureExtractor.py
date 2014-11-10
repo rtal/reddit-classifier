@@ -2,59 +2,25 @@ import collections
 import string
 
 IGNORED_WORDS = [
-    'the', 'The',
-    'a', 'A',
-    'an', 'An',
-    'or', 'Or',
-    'is', 'Is',
-    'and', 'And',
-    'which', 'Which',
-    'on', 'Or',
-    'who', 'Who',
-    'they', 'They',
-    'of', 'Of',
-    'he', 'He',
-    'she', 'She',
-    'anybody', 'Anybody',
-    'it', 'It',
-    'without', 'Without',
-    'between', 'Between',
-    'that', 'That',
-    'my', 'My',
-    'more', 'More',
-    'much', 'Much',
-    'either', 'Either',
-    'neither', 'Neither',
-    'when', 'When',
-    'while', 'While',
-    'although', 'Although',
-    'be', 'Be',
-    'am', 'Am',
-    'are', 'Are',
-    'got', 'Got',
-    'do', 'Do',
-    'no', 'No',
-    'nor', 'Nor',
-    'as', 'As'
+    'the','a', 'an', 'or', 'is', 'and',
+    'which','on', 'who', 'they', 'of', 'he',
+    'she', 'anybody', 'it', 'without', 'between',
+    'that', 'my', 'more', 'much', 'either',
+    'neither', 'when', 'while', 'although', 'be',
+    'am', 'are', 'got', 'do', 'no', 'nor', 'as'
 ]
 
 CONTRACTIONS = {
     "can't": ['can', 'not'],
-    "Can't": ['can', 'not'],
     "cannot": ['can', 'not'],
-    "Cannot": ['can', 'not'],
     "won't": ['will', 'not'],
-    "Won't": ['will', 'not'],
     "shouldn't": ['should', 'not'],
-    "Shouldn't": ['should', 'not'],
-    "I'm": ['I', 'am'],
     "i'm": ['I', 'am'],
-    "He's": ['he' 'is'],
     "he's": ['he' 'is'],
-    "She's": ['she', 'is'],
     "she's": ['she', 'is'],
     "it's": ['it', 'is'],
-    "It's": ['it', 'is']
+    "wouldn't": ['would', 'not']
+    "couldn't": ['could', 'not']
 }
 
 def extractFeatures(title, args):
