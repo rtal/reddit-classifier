@@ -26,9 +26,9 @@ def parseData(fileList):
                     redditReader = csv.reader(redditFile)
                     for post in redditReader:
                         if i % cutoff == 0:
-                            testFile.write(json.dumps({'title': post[4].toLower(), 'subreddit': subreddit}) + '\n')
+                            testFile.write(json.dumps({'title': post[4].lower(), 'subreddit': subreddit}) + '\n')
                         else:
-                            trainFile.write(json.dumps({'title': post[4].toLower(), 'subreddit': subreddit}) + '\n')
+                            trainFile.write(json.dumps({'title': post[4].lower(), 'subreddit': subreddit}) + '\n')
                         i += 1
 
 
