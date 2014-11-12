@@ -40,6 +40,7 @@ def shuffleData():
         data = [(random.random(), line) for line in train]
         data.sort()
         with open('TrainDataShuffled.txt', 'w') as actualTrain:
+            actualTrain.truncate()
             for rand, line in data:
                 actualTrain.write(line)
 
@@ -47,6 +48,7 @@ def shuffleData():
         data = [(random.random(), line) for line in test]
         data.sort()
         with open('TestDataShuffled.txt', 'w') as actualTest:
+            actualTest.truncate()
             for rand, line in data:
                 actualTest.write(line)
 
