@@ -124,6 +124,9 @@ fileNames (required): as many csv files as you want, separated by spaces.
         feature vector.
 --opt3 (optional): optimization to change contractions to expanded words,
         preserving the count of the contraction
+--charFeatures (optional): changes word features (default) to character features
+    Note: if using --charFeatures, then must use -n [integer] to specify how
+    many characters to put in each feature
 """
 
 if __name__ == '__main__':
@@ -132,6 +135,8 @@ if __name__ == '__main__':
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     parser.add_argument('--opt3', action='store_true')
+    parser.add_argument('--charFeatures', action='store_true')
+    parser.add_argument('--n', type=int)
     args = parser.parse_args()
 
     subredditLabels = []
