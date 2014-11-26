@@ -95,6 +95,7 @@ def predict(weights, testSet, args):
     print 'accuracy ' + str(float(correct) / total)
     print 'wrong ' + str(float(incorrect) / total)
 
+
 def printRelevantWeights(weightDict, wordFeatures):
     for subredditKey in weightDict.keys():
         print "subreddit: " + str(subredditKey) 
@@ -114,7 +115,8 @@ def printSortedWeights(weightDict):
         print "========================================"
 
 
-""" To run this program:
+"""
+To run this program:
 python LogisticRegression.py [fileNames] [--opt1] [--opt2] [...]
 
 fileNames (required): as many csv files as you want, separated by spaces.
@@ -127,6 +129,7 @@ fileNames (required): as many csv files as you want, separated by spaces.
 --charFeatures (optional): changes word features (default) to character features
     Note: if using --charFeatures, then must use -n [integer] to specify how
     many characters to put in each feature
+--noShuffle (optional): do not shuffle the training and test sets
 """
 
 if __name__ == '__main__':
@@ -143,13 +146,17 @@ if __name__ == '__main__':
         help='changes from word features to character features')
     parser.add_argument('--n', type=int,
         help='specify the number of characters in an n-gram feature vector')
+    parser.add_argument('--noShuffle', action='store_true',
+        help='do not shuffle the training and test data files')
     args = parser.parse_args()
 
     subredditLabels = []
     for f in args.fileNames:
         subredditLabels.append(f[5:-4])
-
-    extractData.parseData(args.fileNames)
+    
+    if not args.noShuffle:
+        extractData.parseData(args.fileNames)
+    
     with open('TrainDataShuffled.txt', 'r') as trainingSet:
         weightDict = train(trainingSet, subredditLabels, args)
     with open('TestDataShuffled.txt', 'r') as testSet:
