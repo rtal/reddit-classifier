@@ -132,6 +132,7 @@ if __name__ == '__main__':
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     parser.add_argument('--opt3', action='store_true')
+    parser.add_argument('--opt4', action='store_true')
     args = parser.parse_args()
 
     subredditLabels = []
