@@ -1,11 +1,12 @@
 import collections
 import string
 import copy
+import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.stem.snowball import SnowballStemmer
-
+from nltk.corpus import wordnet
 
 IGNORED_WORDS = [
     'the','a', 'an', 'or', 'is', 'and',
@@ -46,15 +47,36 @@ def extractFeatures(title, args):
 
     # more info: http://textminingonline.com/tag/wordnet-lemmatizer
     # and: http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
-    # and also this: http://stackoverflow.com/questions/15586721/wordnet-lemmatization-and-pos-tagging-in-python
 
-    # newTokens = list()
-    # lemmatizer = WordNetLemmatizer()
-    # for t in tokens:
-    #     newTokens.append(lemmatizer.lemmatize(t))
-    # tokens = copy.deepcopy(newTokens)
+    # Optimization: lemmatization using WordNet corpus
+    if args.lemmatize:
+        # from: http://stackoverflow.com/questions/15586721/wordnet-lemmatization-and-pos-tagging-in-python
+        def getWordNetPos(tag):
+            if tag.startswith('J'):
+                return wordnet.ADJ
+            elif tag.startswith('V'):
+                return wordnet.VERB
+            elif tag.startswith('N'):
+                return wordnet.NOUN
+            elif tag.startswith('R'):
+                return wordnet.ADV
+            else:
+                return None
+        newTokens = list()
+        lemmatizer = WordNetLemmatizer()
+        wordTags = nltk.pos_tag(tokens)
+        for (token, tag) in wordTags:
+            wordnetTag = getWordNetPos(tag)
+            if wordnetTag is not None:
+                newTokens.append(lemmatizer.lemmatize(token, wordnetTag))
+            else:
+                newTokens.append(lemmatizer.lemmatize(token))
+        tokens = copy.deepcopy(newTokens)
 
-    if args.opt4:
+    # Optimization: Stemming using PorterStemmer
+    # stemming relies on language's spelling rules, without
+    # semantic understanding of the language itself
+    if args.stem:
         newTokens = list()
         stemmer = PorterStemmer()
         for t in tokens:
