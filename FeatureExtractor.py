@@ -34,7 +34,10 @@ def extractFeatures(title, args):
     if args.opt1:
         exlusionSet = set(string.punctuation)
         exlusionSet.remove("\'")
+        #exlusionSet.remove("-")
+        title = title.replace("-", " ")
         title = ''.join(c for c in title if c not in exlusionSet)
+        
     
     tokens = title.split()
 
