@@ -95,6 +95,7 @@ def predict(weights, testSet, args):
     print 'accuracy ' + str(float(correct) / total)
     print 'wrong ' + str(float(incorrect) / total)
 
+
 def printRelevantWeights(weightDict, wordFeatures):
     for subredditKey in weightDict.keys():
         print "subreddit: " + str(subredditKey) 
@@ -114,33 +115,57 @@ def printSortedWeights(weightDict):
         print "========================================"
 
 
-""" To run this program:
+"""
+To run this program:
 python LogisticRegression.py [fileNames] [--opt1] [--opt2] [...]
 
 fileNames (required): as many csv files as you want, separated by spaces.
 --opt1 (optional): Optimization to remove punctuation (except apostrophes)
         from the title
---opt2 (optional): optimization to remove common filler words from the
-        feature vector.
---opt3 (optional): optimization to change contractions to expanded words,
+--opt2 (optional): optimization to change contractions to expanded words,
         preserving the count of the contraction
+--opt3 (optional): optimization to remove common filler words from the
+        feature vector.
+--charFeatures (optional): changes word features (default) to character features
+    Note: if using --charFeatures, then must use -n [integer] to specify how
+    many characters to put in each feature
+--noShuffle (optional): do not shuffle the training and test sets
 """
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+<<<<<<< HEAD
     parser.add_argument('fileNames', nargs='*')
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     parser.add_argument('--opt3', action='store_true')
     parser.add_argument('--stem', action='store_true')
     parser.add_argument('--lemmatize', action='store_true')
+=======
+    parser.add_argument('fileNames', nargs='*',
+        help='add an arbitary number of subreddit CSV files')
+    parser.add_argument('--opt1', action='store_true',
+        help='removes punctuation (except apostrophes) from the title')
+    parser.add_argument('--opt2', action='store_true',
+        help='changes contractions to their root words')
+    parser.add_argument('--opt3', action='store_true',
+        help='removes common filler words from the feature vector')
+    parser.add_argument('--charFeatures', action='store_true',
+        help='changes from word features to character features')
+    parser.add_argument('--n', type=int,
+        help='specify the number of characters in an n-gram feature vector')
+    parser.add_argument('--noShuffle', action='store_true',
+        help='do not shuffle the training and test data files')
+>>>>>>> master
     args = parser.parse_args()
 
     subredditLabels = []
     for f in args.fileNames:
         subredditLabels.append(f[5:-4])
-
-    extractData.parseData(args.fileNames)
+    
+    if not args.noShuffle:
+        extractData.parseData(args.fileNames)
+    
     with open('TrainDataShuffled.txt', 'r') as trainingSet:
         weightDict = train(trainingSet, subredditLabels, args)
     with open('TestDataShuffled.txt', 'r') as testSet:

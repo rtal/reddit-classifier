@@ -41,10 +41,18 @@ def extractFeatures(title, args):
     if args.opt1:
         exlusionSet = set(string.punctuation)
         exlusionSet.remove("\'")
-        title = ''.join(c for c in title if c not in exlusionSet)
-    
-    tokens = title.split()
+        title = ''.join(c for c in list(title) if c not in exlusionSet)
 
+    if args.charFeatures:
+        noSpaces = list(''.join(title.split()))
+        featureVector = collections.Counter()
+        if (len(noSpaces)) < args.n:
+            return featureVector
+        for i in range(0, len(noSpaces) - (args.n - 1), 1):
+            nGram = ''.join(noSpaces[i : i+args.n])
+            featureVector[nGram] = featureVector[nGram] + 1
+
+<<<<<<< HEAD
     # more info: http://textminingonline.com/tag/wordnet-lemmatizer
     # and: http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
 
@@ -85,6 +93,12 @@ def extractFeatures(title, args):
             newTokens.append(newToken)
         tokens = copy.deepcopy(newTokens)
 
+=======
+        return featureVector
+
+
+    tokens = title.split()
+>>>>>>> master
     featureVector = collections.Counter(tokens)
 
     # Optimization 2: Change contractions to their component words
