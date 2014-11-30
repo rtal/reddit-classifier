@@ -52,7 +52,6 @@ def extractFeatures(title, args):
             nGram = ''.join(noSpaces[i : i+args.n])
             featureVector[nGram] = featureVector[nGram] + 1
 
-<<<<<<< HEAD
     # more info: http://textminingonline.com/tag/wordnet-lemmatizer
     # and: http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
 
@@ -93,12 +92,10 @@ def extractFeatures(title, args):
             newTokens.append(newToken)
         tokens = copy.deepcopy(newTokens)
 
-=======
         return featureVector
 
 
     tokens = title.split()
->>>>>>> master
     featureVector = collections.Counter(tokens)
 
     # Optimization 2: Change contractions to their component words
