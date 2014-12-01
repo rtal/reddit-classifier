@@ -4,9 +4,9 @@ Classify Reddit post titles to the most likely subreddit
 
 ## Prerequisites
 ### nltk
-### sklearn
-
-Install python nltk by following the directions [here](http://www.nltk.org/install.html)
+Install the python nltk package by following the directions [here](http://www.nltk.org/install.html)
+### scikit-learn
+Install the scikit-learn package by following the directions [here](http://scikit-learn.org/stable/install.html)
 
 ## How to run classification using logistic regression
 usage: LogisticRegression.py [-h] [--opt1] [--opt2] [--opt3] [--charFeatures]
