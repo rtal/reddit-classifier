@@ -25,8 +25,7 @@ optional arguments:
   --noShuffle     do not shuffle the training and test data files
   --stem          add word stemming
   --lemmatize     add lematization to the feature vector
-  --naivebayes    this is only here to fix the namespace. naivebayes is a
-                  separate file
+  --naivebayes    this is only here to fix the namespace. naivebayes is a separate file
 
 ### Notes on combining optimizations:
     --opt1, --opt2, and --opt3 can be used in conjunction or by themselves
