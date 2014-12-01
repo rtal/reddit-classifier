@@ -4,9 +4,9 @@ Classify Reddit post titles to the most likely subreddit
 
 ## Prerequisites
 ### nltk
-### sklearn
-
-Install python nltk by following the directions [here](http://www.nltk.org/install.html)
+Install the python nltk package by following the directions [here](http://www.nltk.org/install.html)
+### scikit-learn
+Install the scikit-learn package by following the directions [here](http://scikit-learn.org/stable/install.html)
 
 ## How to run classification using logistic regression
 usage: LogisticRegression.py [-h] [--opt1] [--opt2] [--opt3] [--charFeatures]
@@ -19,14 +19,23 @@ positional arguments:
 
 optional arguments:
   -h, --help      show this help message and exit
+  
   --opt1          removes punctuation (except apostrophes) from the title
+  
   --opt2          changes contractions to their root words
+  
   --opt3          removes common filler words from the feature vector
+  
   --charFeatures  changes from word features to character features
+  
   --n N           specify the number of characters in an n-gram feature vector
+  
   --noShuffle     do not shuffle the training and test data files
+  
   --stem          add word stemming
+  
   --lemmatize     add lematization to the feature vector
+  
   --naivebayes    this is only here to fix the namespace. naivebayes is a separate file
 
 ### Notes on combining optimizations:
@@ -45,7 +54,11 @@ positional arguments:
 
 optional arguments:
   -h, --help    show this help message and exit
+  
   --opt1        removes punctuation (except apostrophes) from the title
+  
   --opt2        changes contractions to their root words
+  
   --opt3        removes common filler words from the feature vector
+  
   --naivebayes  tells the feature extractor to optimize for naive bayes
