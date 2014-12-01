@@ -144,10 +144,14 @@ if __name__ == '__main__':
         help='removes common filler words from the feature vector')
     parser.add_argument('--charFeatures', action='store_true',
         help='changes from word features to character features')
-    parser.add_argument('--n', type=int,
+    parser.add_argument('--n', type=int, default=5,
         help='specify the number of characters in an n-gram feature vector')
     parser.add_argument('--noShuffle', action='store_true',
         help='do not shuffle the training and test data files')
+    parser.add_argument('--stem', action='store_true',
+        help='add word stemming')
+    parser.add_argument('--lemmatize', action='store_true',
+        help='add lematization to the feature vector')
     args = parser.parse_args()
 
     subredditLabels = []
