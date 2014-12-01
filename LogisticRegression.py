@@ -118,18 +118,6 @@ def printSortedWeights(weightDict):
 """
 To run this program:
 python LogisticRegression.py [fileNames] [--opt1] [--opt2] [...]
-
-fileNames (required): as many csv files as you want, separated by spaces.
---opt1 (optional): Optimization to remove punctuation (except apostrophes)
-        from the title
---opt2 (optional): optimization to change contractions to expanded words,
-        preserving the count of the contraction
---opt3 (optional): optimization to remove common filler words from the
-        feature vector.
---charFeatures (optional): changes word features (default) to character features
-    Note: if using --charFeatures, then must use -n [integer] to specify how
-    many characters to put in each feature
---noShuffle (optional): do not shuffle the training and test sets
 """
 
 if __name__ == '__main__':
@@ -152,6 +140,9 @@ if __name__ == '__main__':
         help='add word stemming')
     parser.add_argument('--lemmatize', action='store_true',
         help='add lematization to the feature vector')
+    parser.add_argument('--naivebayes', action='store_true', default=False,
+        help='this is only here to fix the namespace. naivebayes is a separate \
+        file')
     args = parser.parse_args()
 
     subredditLabels = []

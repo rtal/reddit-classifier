@@ -58,6 +58,9 @@ def extractFeatures(title, args):
     # more info: http://textminingonline.com/tag/wordnet-lemmatizer
     # and: http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
 
+    tokens = title.split()
+    featureVector = collections.Counter(tokens)
+
     # Optimization: lemmatization using WordNet corpus
     if args.lemmatize:
         # from: http://stackoverflow.com/questions/15586721/wordnet-lemmatization-and-pos-tagging-in-python
@@ -91,15 +94,12 @@ def extractFeatures(title, args):
         stemmer = PorterStemmer()
         for t in tokens:
             newToken = stemmer.stem(t)
-            print newToken
+            # print newToken
             newTokens.append(newToken)
         tokens = copy.deepcopy(newTokens)
 
         return featureVector
 
-
-    tokens = title.split()
-    featureVector = collections.Counter(tokens)
 
     # Optimization 2: Change contractions to their component words
     if args.opt2:

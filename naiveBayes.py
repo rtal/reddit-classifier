@@ -105,6 +105,7 @@ if __name__ == '__main__':
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     parser.add_argument('--opt3', action='store_true')
+    parser.add_argument('--naivebayes', action='store_true', default=True)
     args = parser.parse_args()
     numLabels = len(args.fileNames)
     (trainX, trainY, testX, testY, testYTitles) = parse_files(args.fileNames, args)
