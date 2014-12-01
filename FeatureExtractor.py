@@ -41,7 +41,10 @@ def extractFeatures(title, args):
     if args.opt1:
         exlusionSet = set(string.punctuation)
         exlusionSet.remove("\'")
-        title = ''.join(c for c in list(title) if c not in exlusionSet)
+        if args.naivebayes:
+            exlusionSet.remove("-")
+        title = title.replace("-", " ")
+        title = ''.join(c for c in title if c not in exlusionSet)
 
     if args.charFeatures:
         noSpaces = list(''.join(title.split()))
