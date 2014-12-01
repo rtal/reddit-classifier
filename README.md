@@ -1,5 +1,7 @@
-reddit-classifier
+Reddit Classifier
 =================
+Classify Reddit post titles to the most likely subreddit
+
 ## Prerequisites
 ### nltk
 ### sklearn
