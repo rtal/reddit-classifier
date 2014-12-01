@@ -101,12 +101,18 @@ def crossValidate(clf, trainX, trainY, cv):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('fileNames', nargs='*')
-    parser.add_argument('--opt1', action='store_true')
-    parser.add_argument('--opt2', action='store_true')
-    parser.add_argument('--opt3', action='store_true')
-    parser.add_argument('--naivebayes', action='store_true', default=True)
+    parser.add_argument('fileNames', nargs='*',
+    	help='add an arbitary number of subreddit CSV files')
+    parser.add_argument('--opt1', action='store_true',
+    	help='removes punctuation (except apostrophes) from the title')
+    parser.add_argument('--opt2', action='store_true',
+    	help='changes contractions to their root words')
+    parser.add_argument('--opt3', action='store_true',
+    	help='removes common filler words from the feature vector')
+    parser.add_argument('--naivebayes', action='store_true', default=True,
+    	help='tells the feature extractor to optimize for naive bayes')
     args = parser.parse_args()
+
     numLabels = len(args.fileNames)
     (trainX, trainY, testX, testY, testYTitles) = parse_files(args.fileNames, args)
     runMultinomialNaiveBayes(trainX, trainY, testX, testY, numLabels, testYTitles)
