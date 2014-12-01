@@ -52,42 +52,7 @@ def parse_files(fileList, args):
 	testX =dictVectorizer.transform(testX)
 	testY = createLabels(numPostsPerSubTest)
 	return (trainX, trainY, testX, testY, testYTitles)
-
-def remove_punctuation(title):
-	exlusionSet = set(string.punctuation)
-	exlusionSet.remove("\'")
-	#exlusionSet.remove("-")
-	title = title.replace("-", " ")
-	return ''.join(c for c in title if c not in exlusionSet)
-
-
-#read in files, output them into train and test as required for libshorttxt format
-#label<tab>title 
-def parse_files_for_libsvm_shorttxt(fileList, out_train_file, out_test_file, args):
-	train_f = open(out_train_file, 'wb')
-	test_f = open(out_test_file, 'wb')
-	test_cutoff = 10
-	for fileName in fileList:
-		subreddit = fileName[5:-4]
-		with open(fileName, 'rb') as redditFile:
-			redditReader = csv.reader(redditFile)
-			i = 0
-			for post in redditReader:
-				words = remove_punctuation(post[4])
-				if i % test_cutoff == 0:
-					#testX.append(dict(words))
-					#testYTitles.append((words, subreddit))
-					test_f.write("%s\t%s\n" %  (subreddit, words))
-					
-				else:
-					train_f.write("%s\t%s\n"% (subreddit, words))
-
-				i += 1
-
-
-
-
-
+	
 #unused (not helpful)
 #takes a counter dict, replaces all non-zero values with 1
 def binarize_features(featureDict):
@@ -140,7 +105,10 @@ if __name__ == '__main__':
     parser.add_argument('--opt1', action='store_true')
     parser.add_argument('--opt2', action='store_true')
     parser.add_argument('--opt3', action='store_true')
+    parser.add_argument('--charFeatures', action = 'store_true', default=False)
     parser.add_argument('--naivebayes', action='store_true', default=True)
+    parser.add_argument('--lemmatize', default=False)
+    parser.add_argument('--stem', default = False)
     args = parser.parse_args()
     numLabels = len(args.fileNames)
     (trainX, trainY, testX, testY, testYTitles) = parse_files(args.fileNames, args)
