@@ -137,15 +137,26 @@ def crossValidate(clf, trainX, trainY, cv):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('fileNames', nargs='*',
-    	help='add an arbitary number of subreddit CSV files')
+        help='add an arbitary number of subreddit CSV files')
     parser.add_argument('--opt1', action='store_true',
-    	help='removes punctuation (except apostrophes) from the title')
+        help='removes punctuation (except apostrophes) from the title')
     parser.add_argument('--opt2', action='store_true',
-    	help='changes contractions to their root words')
+        help='changes contractions to their root words')
     parser.add_argument('--opt3', action='store_true',
-    	help='removes common filler words from the feature vector')
+        help='removes common filler words from the feature vector')
+    parser.add_argument('--charFeatures', action='store_true',
+        help='changes from word features to character features')
+    parser.add_argument('--n', type=int, default=5,
+        help='specify the number of characters in an n-gram feature vector')
+    parser.add_argument('--noShuffle', action='store_true',
+        help='do not shuffle the training and test data files')
+    parser.add_argument('--stem', action='store_true',
+        help='add word stemming')
+    parser.add_argument('--lemmatize', action='store_true',
+        help='add lematization to the feature vector')
     parser.add_argument('--naivebayes', action='store_true', default=True,
-    	help='tells the feature extractor to optimize for naive bayes')
+        help='this is only here to fix the namespace. naivebayes is a separate \
+        file')
     args = parser.parse_args()
 
     numLabels = len(args.fileNames)
