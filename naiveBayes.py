@@ -53,6 +53,7 @@ def parse_files(fileList, args):
 	testY = createLabels(numPostsPerSubTest)
 	return (trainX, trainY, testX, testY, testYTitles)
 
+
 def remove_punctuation(title):
 	exlusionSet = set(string.punctuation)
 	exlusionSet.remove("\'")
@@ -86,14 +87,13 @@ def parse_files_for_libsvm_shorttxt(fileList, out_train_file, out_test_file, arg
 
 
 
-
-
 #unused (not helpful)
 #takes a counter dict, replaces all non-zero values with 1
 def binarize_features(featureDict):
 	for key in featureDict.iterkeys():
 		if featureDict[key] != 0:
 			featureDict[key] = 1
+
 
 #takes in a list of number of posts per sub, 
 #returns corresponding numpy array of labels, 
@@ -108,6 +108,23 @@ def createLabels(numPostsPerSub):
 			index += 1
 	return labels
 
+
+def runErrorAnalysis(testY, predY, testYTitles, numExamples = 10):
+    count = 0
+    for test, pred, title in zip(testY, predY, testYTitles):
+        if test != pred:
+            count+= 1
+            print str(title) + " predicted: " + str(labelToSubreddit[ int(pred)])
+            if count == numExamples:
+                break
+
+
+def crossValidate(clf, trainX, trainY, cv):
+    scores = cross_validation.cross_val_score(clf, trainX, trainY.ravel(), cv=cv)
+    print scores
+    print "average: " + str(sum(scores)/len(scores))
+
+
 def runMultinomialNaiveBayes(trainX, trainY, testX, testY, numLabels, testYTitles):
 	clf = MultinomialNB()
 
@@ -118,21 +135,6 @@ def runMultinomialNaiveBayes(trainX, trainY, testX, testY, numLabels, testYTitle
 	cm = confusion_matrix(testY, predY)
 	print cm
 	runErrorAnalysis(testY, predY, testYTitles)
-
-
-def runErrorAnalysis(testY, predY, testYTitles, numExamples = 10):
-	count = 0
-	for test, pred, title in zip(testY, predY, testYTitles):
-		if test != pred:
-			count+= 1
-			print str(title) + " predicted: " + str(labelToSubreddit[ int(pred)])
-			if count == numExamples:
-				break
-
-def crossValidate(clf, trainX, trainY, cv):
-	scores = cross_validation.cross_val_score(clf, trainX, trainY.ravel(), cv=cv)
-	print scores
-	print "average: " + str(sum(scores)/len(scores))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
