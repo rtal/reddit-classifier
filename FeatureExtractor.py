@@ -59,7 +59,6 @@ def extractFeatures(title, args):
     # and: http://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
 
     tokens = title.split()
-    featureVector = collections.Counter(tokens)
 
     # Optimization: lemmatization using WordNet corpus
     if args.lemmatize:
@@ -98,8 +97,7 @@ def extractFeatures(title, args):
             newTokens.append(newToken)
         tokens = copy.deepcopy(newTokens)
 
-        return featureVector
-
+    featureVector = collections.Counter(tokens)
 
     # Optimization 2: Change contractions to their component words
     if args.opt2:
