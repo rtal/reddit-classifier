@@ -8,8 +8,8 @@ Install the python nltk package by following the directions [here](http://www.nl
 ### scikit-learn
 Install the scikit-learn package by following the directions [here](http://scikit-learn.org/stable/install.html)
 
-## How to run classification using logistic regression
-usage: LogisticRegression.py [-h] [--opt1] [--opt2] [--opt3] [--charFeatures]
+## How to run classification using linear regression
+usage: linearRegression.py   [-h] [--opt1] [--opt2] [--opt3] [--charFeatures]
                              [--n N] [--noShuffle] [--stem] [--lemmatize]
                              [--naivebayes]
                              [fileNames [fileNames ...]]
