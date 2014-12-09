@@ -14,7 +14,8 @@ IGNORED_WORDS = [
     'she', 'anybody', 'it', 'without', 'between',
     'that', 'my', 'more', 'much', 'either',
     'neither', 'when', 'while', 'although', 'be',
-    'am', 'are', 'got', 'do', 'no', 'nor', 'as'
+    'am', 'are', 'got', 'do', 'no', 'nor', 'as', 
+    'this', 'there', 'their', 'to', 'your', 'by'
 ]
 
 CONTRACTIONS = {

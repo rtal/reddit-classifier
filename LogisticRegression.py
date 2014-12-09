@@ -78,16 +78,17 @@ def predict(weights, testSet, args):
         if prediction == subreddit:
             correct += 1
         else:
-            # try:
-            #     print title
-            #     print "predicted: " + prediction.encode('utf-8')
-            #     print features
-            #     # printRelevantWeights(weights, features)
-            #     print "-----------------"
+            if args.verbose:
+                try:
+                    print title
+                    print "predicted: " + prediction.encode('utf-8')
+                    print features
+                    printRelevantWeights(weights, features)
+                    print "-----------------"
 
 
-            # except UnicodeEncodeError:
-            #     print "error"
+                except UnicodeEncodeError:
+                    print "error"
             incorrect += 1
         total += 1
 
@@ -143,6 +144,8 @@ if __name__ == '__main__':
     parser.add_argument('--naivebayes', action='store_true', default=False,
         help='this is only here to fix the namespace. naivebayes is a separate \
         file')
+    parser.add_argument('--verbose', action='store_true', default=False,
+        help='print out useful statistics about the dataset and classification')
     args = parser.parse_args()
 
     subredditLabels = []
@@ -157,4 +160,5 @@ if __name__ == '__main__':
     with open('TestDataShuffled.txt', 'r') as testSet:
         predict(weightDict, testSet, args)
     
-    # printSortedWeights(weightDict)
+    if args.verbose:
+        printSortedWeights(weightDict)

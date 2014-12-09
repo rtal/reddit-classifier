@@ -52,9 +52,6 @@ def parse_files(fileList, args):
 	testX =dictVectorizer.transform(testX)
 	testY = createLabels(numPostsPerSubTest)
 	return (trainX, trainY, testX, testY, testYTitles)
-<<<<<<< HEAD
-	
-=======
 
 
 def remove_punctuation(title):
@@ -89,8 +86,6 @@ def parse_files_for_libsvm_shorttxt(fileList, out_train_file, out_test_file, arg
 				i += 1
 
 
-
->>>>>>> 5c59245528e7fc38f19e2cbb54ce9f2720621890
 #unused (not helpful)
 #takes a counter dict, replaces all non-zero values with 1
 def binarize_features(featureDict):
@@ -142,16 +137,6 @@ def runMultinomialNaiveBayes(trainX, trainY, testX, testY, numLabels, testYTitle
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-# <<<<<<< HEAD
-#     parser.add_argument('fileNames', nargs='*')
-#     parser.add_argument('--opt1', action='store_true')
-#     parser.add_argument('--opt2', action='store_true')
-#     parser.add_argument('--opt3', action='store_true')
-#     parser.add_argument('--charFeatures', action = 'store_true', default=False)
-#     parser.add_argument('--naivebayes', action='store_true', default=True)
-#     parser.add_argument('--lemmatize', default=False)
-#     parser.add_argument('--stem', default = False)
-# =======
     parser.add_argument('fileNames', nargs='*',
         help='add an arbitary number of subreddit CSV files')
     parser.add_argument('--opt1', action='store_true',
@@ -173,7 +158,8 @@ if __name__ == '__main__':
     parser.add_argument('--naivebayes', action='store_true', default=True,
         help='this is only here to fix the namespace. naivebayes is a separate \
         file')
-#>>>>>>> 5c59245528e7fc38f19e2cbb54ce9f2720621890
+    parser.add_argument('--verbose', action='store_true', default=False,
+        help='not used in this file, only works in LogisticRegression.py')
     args = parser.parse_args()
 
     numLabels = len(args.fileNames)
