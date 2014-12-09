@@ -11,7 +11,7 @@ Install the scikit-learn package by following the directions [here](http://sciki
 ## How to run classification using linear regression
 usage: linearRegression.py   [-h] [--opt1] [--opt2] [--opt3] [--charFeatures]
                              [--n N] [--noShuffle] [--stem] [--lemmatize]
-                             [--naivebayes]
+                             [--naivebayes] [--verbose]
                              [fileNames [fileNames ...]]
 
 positional arguments:
@@ -37,6 +37,8 @@ optional arguments:
   --lemmatize     add lematization to the feature vector
   
   --naivebayes    this is only here to fix the namespace. naivebayes is a separate file
+  
+  --verbose       print out useful statistical information regarding classification
 
 ### Notes on combining optimizations:
     --opt1, --opt2, and --opt3 can be used in conjunction or by themselves
