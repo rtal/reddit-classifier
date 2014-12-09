@@ -14,23 +14,28 @@ def parseData(fileList):
     Note that the data.txt file is overwritten each time this script is called.
     This behavior may be modified in the future so that new data is appended.
     """
-    cutoff = 10
+    cutoff = 1      # fraction of data to be in test set = cutoff / 10
+    inTest = 0
+    inTrain = 0
     with open('TrainData.txt', 'wb') as trainFile:
         with open('TestData.txt', 'wb') as testFile:
             trainFile.truncate()
             testFile.truncate()
             for fileName in fileList:
-                i = 0
                 subreddit = fileName[5:-4]
                 # subreddit = fileName.strip('.csv').strip('data/')
                 with open(fileName, 'rb') as redditFile:
                     redditReader = csv.reader(redditFile)
                     for post in redditReader:
-                        if i % cutoff == 0:
+                        if random.uniform(0, 1) * 10 < cutoff:
+                            inTest += 1
                             testFile.write(json.dumps({'title': post[4].lower(), 'subreddit': subreddit}) + '\n')
                         else:
+                            inTrain += 1
                             trainFile.write(json.dumps({'title': post[4].lower(), 'subreddit': subreddit}) + '\n')
-                        i += 1
+            print 'In test set: %d' % inTest
+            print 'In training set: %d' % inTrain
+            print "========================================"
     shuffleData()
 
 
