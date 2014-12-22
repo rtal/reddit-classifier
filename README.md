@@ -73,3 +73,6 @@ optional arguments:
 ```
 The first line of this file parses the files of the relevant subreddits into training and test files to be used by the SVM. The number of CSV is arbitrary and more or different ones can be added.
 The subsequent lines train and test the SVM. The meanings of the flags can be read within the README provided by LibShortText.
+
+## Notes
+1) CSV data files can be found [here](https://github.com/umbrae/reddit-top-2.5-million)
