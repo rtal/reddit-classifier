@@ -3,13 +3,13 @@ Reddit Classifier
 Classify Reddit post titles to the most likely subreddit
 
 ## Prerequisites
-### nltk
+##### nltk
 Install the python nltk package by following the directions [here](http://www.nltk.org/install.html)
-### scikit-learn
+##### scikit-learn
 Install the scikit-learn package by following the directions [here](http://scikit-learn.org/stable/install.html)
-### numpy
+##### numpy
 Install the numpy package by following the directions [here](http://www.numpy.org)
-### LibShortText
+##### LibShortText
 Package and installation instructions can be found [here](http://www.csie.ntu.edu.tw/~cjlin/libshorttext/)
 
 
